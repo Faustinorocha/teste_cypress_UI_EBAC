@@ -1,23 +1,24 @@
+import perfil from  '../fixtures/perfil.json'
 
 describe('Funcionalidade de Login', () => {
   
+ 
+  beforeEach(() => {
+    cy.clearCookies()
+    cy.clearLocalStorage()
+    cy.visit('minha-conta')
 
-    beforeEach(() => {
-      cy.clearCookies()
-      cy.clearLocalStorage()
-      cy.visit('http://lojaebac.ebaconline.art.br/')
-      
-    });
+  });
 
-    afterEach(() => {
-      cy.screenshot()
-    });
+  afterEach(() => {
+    cy.screenshot()
+  });
 
-   context('Quando o usuário informar credenciais válidas', () => { 
+  context('Quando o usuário informar credenciais válidas', () => {
     it('Efetuar login com sucesso', () => {
-      cy.get('.icon-user-unfollow').should('be.visible').click()
-      cy.get('[name="username"]').type('a@sa.com')
-      cy.get('#password').type('Oeste1313@')
+      
+      cy.get('[name="username"]').type(perfil.usuarioEmailCorreto)
+      cy.get('#password').type(perfil.senhaCorreta, {log: false})
       cy.get('[name="login"]').click()
 
       cy.get('a > .hidden-xs').should('contain', 'Welcome a-2866 !')
@@ -25,13 +26,13 @@ describe('Funcionalidade de Login', () => {
 
     });
   });
-  
+
   context('Quando o usuário informar e-mail inválido', () => {
     it('Exibir mensagem de erro do e-mail', () => {
-      cy.visit('http://lojaebac.ebaconline.art.br/')
-      cy.get('.icon-user-unfollow').should('be.visible').click()
-      cy.get('[name="username"]').type('112a@sa.com')
-      cy.get('#password').type('Oeste1313@')
+      
+      
+      cy.get('[name="username"]').type(perfil.usuarioEmailErrado)
+      cy.get('#password').type(perfil.senhaCorreta, {log: false})
       cy.get('[name="login"]').click()
 
       cy.get('.woocommerce-error').should('contain', 'Endereço de e-mail desconhecido. Verifique novamente ou tente seu nome de usuário.')
@@ -39,12 +40,13 @@ describe('Funcionalidade de Login', () => {
 
 
     });
- });
- context('Quando o usuário informar password inválido', () => {
-    it('Exibir mensagem de erro do password', () => {
-      cy.get('.icon-user-unfollow').should('be.visible').click()
-      cy.get('[name="username"]').type('a@sa.com')
-      cy.get('#password').type('Oeste1313@123')
+  });
+  context('Quando o usuário informar senha inválido', () => {
+    it('Exibir mensagem de erro do senha', () => {
+      
+      
+      cy.get('[name="username"]').type(perfil.usuarioEmailCorreto)
+      cy.get('#password').type(perfil.senhaErrada, {log: false})
       cy.get('[name="login"]').click()
 
       cy.get('.woocommerce-error').should('contain', 'Erro: A senha fornecida para o e-mail a@sa.com está incorreta. Perdeu a senha?')

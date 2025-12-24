@@ -1,0 +1,28 @@
+[
+    {
+    
+    "nome": "Pedro",
+    "sobrenome": "alcantara",
+    "pais": "Brasil",
+    "endereco": "Av.Brasil",
+    "complemento": "Predio comercial",
+    "cidade": "São Paulo",
+    "estado": "São Paulo",
+    "cep": "00000000",
+    "telefone": "1122002200"
+    
+    },
+    {
+    
+    "nome": "jorge",
+    "sobrenome": "Ernesto",
+    "pais": "Brasil",
+    "endereco": "Av.da consolação",
+    "complemento": "casa",
+    "cidade": "Chorozinho",
+    "estado": "Ceará",
+    "cep": "00000000",
+    "telefone": "1101020234"
+    
+    }
+]

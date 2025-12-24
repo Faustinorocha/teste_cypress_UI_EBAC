@@ -1,15 +1,25 @@
 import perfil from "../fixtures/perfil.json"
+import enderecoPage from "../support/page-objects/endereco.page"
+import dadosEndereco from "../fixtures/endereco.json"
 
 describe('Funcionalidade Endereço: Faturamento e Entrega', () => {
     
     beforeEach(() => {
-        cy.visit('minha-conta');
-        cy.login(perfil.usuarioEmailCorreto, perfil.senhaCorreta);
+        cy.login()
     });
 
-    context('Preenche endereço de faturamento', () => {
-        it('Endereço de faturamento válido', () => {
-            cy.get('.woocommerce-MyAccount-navigation-link--edit-address').click()
+    context('Endereço de faturamento', () => {
+        it('Completar endereço de faturamento', () => {
+           enderecoPage.editarEnderecoFaturamento(dadosEndereco[1])
+
+           cy.get('.woocommerce-message').should('contain','Endereço alterado com sucesso.')
+        });
+    })
+
+    context('Endereço de entregra', () => {
+        it('Completar endereço de entrega', () => {
+           enderecoPage.editarEnderecoEntrega(dadosEndereco[0])            
+            cy.get('.woocommerce-message').should('contain','Endereço alterado com sucesso.')
         });
     })
 });
